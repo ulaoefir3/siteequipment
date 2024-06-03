@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>{{ category.name }}</h1>
+    <div class="equipment-list">
+        {% for item in equipment %}
+            <div class="equipment-item">
+                <!-- Отобразите информацию об оборудовании -->
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.manufacture.name }}</p>
+                <!-- ... -->
+            </div>
+        {% empty %}
+            <p>Нет доступного оборудования для данной категории.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

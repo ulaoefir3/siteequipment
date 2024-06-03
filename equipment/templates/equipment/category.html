@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .post-item {
+        transition: transform 0.3s;
+    }
+
+    .post-item:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <h1><strong>{{ category.name }}</strong></h1>
+        <p>На этой странице отображаются {{ category.name|lower }} в сервисных центрах РУП "Белтелеком" города Минска. Обратите внимание на дату и время обновления статистики по сервисным центрам.</p>
+        <div class="post-list">
+            {% for equipment in equipments %}
+                <div class="post-item" style="text-align: center;">
+                    <!-- Отобразите информацию об оборудовании -->
+                    {% if equipment.photo %}
+                    <p><img class="img-article thumb" src="{{equipment.photo.url}}"></p>
+                    {% endif %}
+                    <h2 style="text-align: left;">{{ equipment.manufacture.name }}</h2>
+                    <p style="text-align: left;">{{ equipment.title }}</p>
+                    {% if equipment.name_filter %}
+                    <hr>
+                    <p style="text-align: left;"><strong>{{ equipment.name_filter }}</strong> {{ equipment.value_filter }}</p>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>Нет доступного оборудования для данной категории.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

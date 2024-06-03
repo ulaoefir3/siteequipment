@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .post-item {
+        transition: transform 0.3s;
+    }
+
+    .post-item:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+
+<!--<div class="row row-cols-lg-auto g-2 justify-content-center justify-content-lg-start">-->
+<!--<div class="col-auto mb-3 d-flex">-->
+<!--    <div class="card rounded-5 " style="width: 13rem; height: 100%">-->
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <h1>Главная</h1>
+        <p>Выберите тип оборудования из предоставленных ниже для получения информации о его наличии в сервисных центрах города Минска.</p>
+
+        <h1>Арендное оборудование</h1>
+        <div class="post-list">
+            {% for category in categories_for_rent %}
+
+            <div class="post-item" style="text-align: center; cursor: pointer;" onclick="window.location.href='{{ category.get_absolute_url }}'">
+                {% if category.photo %}
+                <p><img class="img-article thumb" src="{{category.photo.url}}"></p>
+                {% endif %}
+                <h2  class="card-text text-center">{{ category.name }}</h2>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <h1>Оборудование для продажи</h1>
+        <div class="post-list">
+            {% for category in categories_for_sale %}
+            <div class="post-item" style="text-align: center; cursor: pointer;" onclick="window.location.href='{{ category.get_absolute_url }}'">
+                {% if category.photo %}
+                <p><img class="img-article thumb" src="{{category.photo.url}}"></p>
+                {% else %}
+                <p>No photo available</p>
+                {% endif %}
+                <h2 class="card-text text-center">{{ category.name }}</h2>
+<!--                <p><a href="{{ category.get_absolute_url }}">more</a></p>-->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

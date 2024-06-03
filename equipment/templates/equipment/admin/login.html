@@ -1,0 +1,12 @@
+{% extends 'admin/base_site.html' %}
+
+{% block title %}Вход в административную панель{% endblock %}
+
+{% block content %}
+  <h2>Вход в административную панель</h2>
+  <form method="post" action="{% url 'admin-login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+  </form>
+{% endblock %}
